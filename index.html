@@ -312,7 +312,22 @@
             🔑 Paste your Gemini API key to use the app (get it from Google AI Studio)
         </div>
         <div class="api-key-container">
-            <input type="password" id="apiKeyInput" class="api-key-input" placeholder="Paste your Gemini API key here">
+            <div style="display: flex; flex-direction: column; width: 280px;">
+                <input type="password" id="apiKeyInput" class="api-key-input"
+                    style="width: 100%; box-sizing: border-box;" placeholder="Paste your Gemini API key here">
+
+                <div
+                    style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-secondary); padding: 0.75rem; border-radius: 8px; background-color: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-color);">
+                    <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem;">How to get your
+                        API key:</div>
+                    <ol style="margin: 0; padding-left: 1.25rem; line-height: 1.5;">
+                        <li>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank"
+                                style="color: var(--accent-color); text-decoration: none;">Google AI Studio</a></li>
+                        <li>Click "Create API Key"</li>
+                        <li>Copy and paste it here</li>
+                    </ol>
+                </div>
+            </div>
         </div>
         <h1>Task Analyzer</h1>
 
