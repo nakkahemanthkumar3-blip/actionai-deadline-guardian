@@ -308,8 +308,11 @@
 
     <div class="container">
         <div id="riskAlert" class="top-risk-alert">⚠️ HIGH RISK TASK — START NOW</div>
+        <div style="color:var(--text-secondary); font-size:0.85rem; text-align:center; margin-bottom:10px;">
+            🔑 Paste your Gemini API key to use the app (get it from Google AI Studio)
+        </div>
         <div class="api-key-container">
-            <input type="password" id="apiKeyInput" class="api-key-input" placeholder="Google Gemini API Key">
+            <input type="password" id="apiKeyInput" class="api-key-input" placeholder="Paste your Gemini API key here">
         </div>
         <h1>Task Analyzer</h1>
 
@@ -394,10 +397,15 @@ ${text}`
                 const data = await response.json();
                 let results = [];
                 try {
+                    if (!data || !data.candidates || data.candidates.length === 0) {
+                        throw new Error("Empty response");
+                    }
                     const rawText = data.candidates[0].content.parts[0].text;
-                    results = JSON.parse(rawText);
+                    const cleanText = rawText.replace(/```json/gi, '').replace(/```/gi, '').trim();
+                    results = JSON.parse(cleanText);
                 } catch (e) {
-                    throw new Error("Failed to parse Gemini response as JSON.");
+                    outputDisplay.innerHTML = `<div style="color: var(--warning-color); padding: 1rem; width: 100%; text-align: center; font-weight: 600;">⚠️ AI temporarily unavailable, please try again later</div>`;
+                    return;
                 }
 
                 if (!Array.isArray(results) || results.length === 0) {
